@@ -1,0 +1,16 @@
+.pay {
+    color: red;
+}
+
+.receieve {
+    color: green;
+}
+
+.transactionContainer {
+    display: flex;
+}
+
+.iconContainer {
+    font-size: 40px;
+    margin-right: 8px;
+}

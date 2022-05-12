@@ -1,0 +1,16 @@
+.formWrapper {
+    text-align: -webkit-center;
+}
+
+.input {
+    display: block;
+    margin: 16px;
+}
+
+.label {
+
+}
+
+.submit {
+    display: block;
+}

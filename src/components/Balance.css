@@ -1,0 +1,20 @@
+.pay {
+    color: red;
+}
+
+.receieve {
+    color: green;
+}
+
+.title {
+    margin-bottom: 4px;
+}
+
+.balanceWrapper {
+    background-color: cornsilk;
+    min-width: 100px;
+    width: fit-content;
+    border-radius: 8px;
+    padding: 8px;
+    margin: 8px;
+}
