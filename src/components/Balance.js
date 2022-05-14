@@ -1,12 +1,12 @@
 import './Balance.css';
 export default function Balance({title,value,type}){
-    let valueStyle = type === 'pay' ? 'pay' : 'receieve';
+    let valueStyle = type === 'pay' ? 'pay' : 'receive';
     if(type === 'total'){
         if(value < 0 ){
             valueStyle = 'pay';
         }
         else {
-            valueStyle = 'receieve';
+            valueStyle = 'receive';
         }
     }
     return <div className='balanceWrapper'>
