@@ -1,16 +1,17 @@
 import styles from './Login.module.css';
-import { validateLogin } from '../utils/utils';
+import { validateLogin } from '../../utils/utils';
 import {useState} from 'react';
 import { useNavigate } from "react-router-dom";
 const Login =  () => {
     const [error,setError] = useState('');
     const navigate = useNavigate();
-    const onLoginSubmit = (e) => {
+    const onLoginSubmit = async (e) => {
         e.preventDefault();
         console.log('e',e);
-        const user = validateLogin(e.target[0].value,e.target[1].value);
+        const user = await validateLogin(e.target[0].value,e.target[1].value);
         if(user){
-            console.log('logged in!');
+            //maintaining the user in localstorage
+            localStorage.setItem('user',JSON.stringify(user));
             navigate('/dashboard');
         }
         else{

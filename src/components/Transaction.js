@@ -1,10 +1,10 @@
 import {formatNumber} from '../utils/utils';
 import styles from './Transaction.module.css';
 export default function Transaction({name,text,amount,type}){
-    let valueStyle = type === 'pay' ? 'pay' : 'receive';
+    let valueStyle = type === 'borrow' ? 'pay' : 'receive';
     return <div className={styles.transactionContainer}>
         <div className={styles.iconContainer}>
-        <i class='far fa-id-badge'></i>
+        <i className='far fa-id-badge'></i>
         </div>
         <div>
         <div className={styles.title}>{name}</div>

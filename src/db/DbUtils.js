@@ -1,12 +1,16 @@
 import { collection, getDocs, addDoc } from "firebase/firestore"; 
 import db from './InitialiseDb';
 
-export function getData(model){
-    getDocs(collection(db, model)).then((querySnapshot)=>{querySnapshot.forEach((doc) => {
-        console.log(doc.data());
-      });});
-}
+export async function getData(model){
+    let response = [];
+    const data = await getDocs(collection(db, model));
+    data.forEach((doc) => {
+        response.push(doc.data())
+      });
+    return response;
+} 
 
-export function postData(model,data){
-    
+export async function postData(model,data){
+   const response = await addDoc(collection(db, model), data);
+   return response;
 }
