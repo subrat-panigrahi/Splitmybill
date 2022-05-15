@@ -8,7 +8,7 @@ export default function Transaction({name,text,amount,type}){
         </div>
         <div>
         <div className={styles.title}>{name}</div>
-        <span> {text} </span> <span className={styles[valueStyle]}>{formatNumber(Number(amount))}</span>
+        <span> {type === 'debt'? 'owes you' : 'you owe'} </span> <span className={styles[valueStyle]}>{formatNumber(Number(amount))}</span>
         </div>
     </div>
 }

@@ -6,19 +6,16 @@ import TransactionList from '../Transactionlist/Transactionlist';
 import { useEffect, useState } from 'react';
 import { getData } from '../../db/DbUtils';
 import AddExpense from '../AddExpense';
-
-const transactions = [
-  { name: 'Hari', amount: 50, type: 'debt' },
-  { name: 'Gopal', amount: 100, type: 'borrow' },
-  { name: 'Steve', amount: 1500, type: 'debt' },
-];
+import SettleExpense from '../SettleExpense';
 
 function Dashboard() {
   const [addExpenseClicked, setAddExpenseClicked] = useState(false);
   const [settleClicked, setSettleClicked] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
  //  const [transactionList, setTransactionList] = useState([]);
   const [userTransactions, setUserTransactions] = useState([]);
   const [accumulatedValue, setAccumulatedValue] = useState({borrow:0, debt:0, total:0});
+  const [users, setUsers] = useState([]);
   const calculateTotalValues = (trx) => {
     const output = trx.reduce((acc, tx)=>{
       if(tx.type === 'debt'){
@@ -39,36 +36,72 @@ function Dashboard() {
      return user[0].name;
   }
 
+  async function getTransactions() {
+    const currentUser = JSON.parse(localStorage.getItem('user'));
+    const transactions = await (await getData('transactions')).filter((item)=>item.status===0);
+    const users = await getData('users');
+    const userTransactions = transactions.filter(
+        (trans) =>
+          trans.user1.toString() === currentUser.id.toString() ||
+          trans.user2.toString() === currentUser.id.toString()
+      ).map((currentTransaction) => {
+        let type='';
+        let name='';
+        if(currentTransaction.user2.toString() === currentUser.id.toString()){
+          name = currentTransaction.user1;
+          if(currentTransaction.transactionType === 'debt'){
+            type = 'borrow';
+          }
+          if(currentTransaction.transactionType === 'borrow'){
+            type = 'debt';
+          }
+        }
+        else{
+          type = currentTransaction.transactionType;
+          name = currentTransaction.user2;
+        }
+        return {
+          amount: currentTransaction.amount,
+          type: type,
+          name: getUserName(users,name),
+          userId: currentTransaction.user2,
+          reason: currentTransaction.reason,
+          id: currentTransaction.id,
+          date: currentTransaction.date
+        };
+      });
+      userTransactions.reduce((acc,utx)=>{ return acc;},[]);
+    calculateTotalValues(userTransactions);
+    setUserTransactions(userTransactions);
+    setUsers(users);
+    setIsLoading(false);
+  }
+
   useEffect(() => {
-    async function getTransactions() {
-      const currentUser = JSON.parse(localStorage.getItem('user'));
-      const transactions = await getData('transaction123');
-      const users = await getData('users');
-      const userTransactions = transactions.filter(
-          (trans) =>
-            trans.user1.toString() === currentUser.id.toString() ||
-            trans.user2.toString() === currentUser.id.toString()
-        ).map((currentTransaction) => {
-          return {
-            amount: currentTransaction.amount,
-            type: currentTransaction.transactionType,
-            name: getUserName(users,currentTransaction.user2),
-            userId: currentTransaction.user2
-          };
-        })
-        userTransactions.reduce((acc,utx)=>{ return acc;},[]);
-      calculateTotalValues(userTransactions);
-      setUserTransactions(userTransactions);
-    }
     getTransactions();
-  }, []);
+  }, [getTransactions]);
 
   const onAddExpenseClick = () => {
     setAddExpenseClicked(true);
+    setSettleClicked(false);
   };
   const onSettleClick = () => {
     setSettleClicked(true);
+    setAddExpenseClicked(false);
   };
+
+  const onExpenseSubmit = () => {
+    getTransactions();
+    setAddExpenseClicked(false);
+    setSettleClicked(false);
+  }
+
+  const onSettlement = () => {
+    getTransactions();
+    setAddExpenseClicked(false);
+    setSettleClicked(false);
+  }
+
   return (
     <div className="App">
       <header className="App-header">
@@ -77,14 +110,15 @@ function Dashboard() {
             onAddExpense={onAddExpenseClick}
             onSettle={onSettleClick}
           />
-          {addExpenseClicked && <AddExpense />}
+          {addExpenseClicked && <AddExpense onExpenseSubmit = {onExpenseSubmit} users={users}/>}
+          {settleClicked && <SettleExpense transactions={userTransactions} onSettlement={onSettlement}/>}
           {accumulatedValue && <div style={{ display: 'flex' }}>
             <Balance title="total balance" value={accumulatedValue.total} type="total" />
             <Balance title="you owe" value={accumulatedValue.borrow} type="borrow" />
             <Balance title="you are owed" value={accumulatedValue.debt} type="debt" />
           </div>
 }
-          <TransactionList transactions={userTransactions} />
+          <TransactionList transactions={userTransactions} isLoading={isLoading}/>
         </Layout>
       </header>
     </div>

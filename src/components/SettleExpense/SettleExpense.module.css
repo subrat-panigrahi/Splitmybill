@@ -1,0 +1,9 @@
+.settleRowWrapper {
+    display: flex;
+}
+
+.rowItem {
+    margin: 8px;
+    min-width: 100px;
+    word-wrap: break-word;
+}

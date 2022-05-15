@@ -1,16 +1,17 @@
-import { users } from '../../mock';
+// import { users } from '../../mock';
 import { useState } from 'react';
 import { postData } from '../../db/DbUtils';
 
-export default function AddExpense({}) {
+export default function AddExpense({onExpenseSubmit, users}) {
   const [reason, setReason] = useState('');
   const [date, setDate] = useState('');
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [transactionType, setTransactionType] = useState('');
   const [error, setError] = useState('');
   const [amount, setAmount] = useState(0);
+  const currentUser = JSON.parse(localStorage.getItem('user'));
 
-  const onExpenseSubmit = (e) => {
+  const onExpenseFormSubmit = (e) => {
     setError('');
     e.preventDefault();
     console.log('e is', e.target);
@@ -20,11 +21,13 @@ export default function AddExpense({}) {
     else {
         const timeStamp = Date.now();
         const amountPerPesrson = Number(amount)/selectedUsers.length;
-        let currentUser = JSON.parse(localStorage.getItem('user'));
+        const promiseArray = []
         for(let user of selectedUsers){
             const object = {user1:currentUser.id , transactionType: transactionType, reason : reason, date: date, user2: user, transactionId: `${reason}${timeStamp}`, status:0, amount: amountPerPesrson};
-            postData('transaction123',object);
+            promiseArray .push(postData('transactions',object));
         }
+
+        Promise.allSettled(promiseArray).then((res)=>{onExpenseSubmit();});
     }
   };
   const onUserSelection = (e) => {
@@ -62,7 +65,7 @@ export default function AddExpense({}) {
 
   return (
     <div>
-      <form onSubmit={onExpenseSubmit}>
+      <form onSubmit={onExpenseFormSubmit}>
         <div>Reason</div>
         <input
           type="text"
@@ -85,7 +88,7 @@ export default function AddExpense({}) {
 
         <input type='number' min={0} required onChange={(e)=>onAmountChange(e.target.value)}></input>
         <div> Select participants </div>
-        {users.map((user) => (
+        {users.filter((i)=>i.id.toString() !== currentUser.id.toString()).map((user) => (
           <label>
             <input
               type="checkbox"

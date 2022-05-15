@@ -1,0 +1,23 @@
+.pageContainer {
+    display: flex;    
+}
+.left {
+    width: 30%;
+    margin:16px;
+}
+
+.right {
+    margin:8px;
+    width: 70%;
+}
+
+.leftPanelButton {
+    color: orange;
+    font-size: 24px;
+}
+
+.userName {
+    margin-bottom: 16px;
+    font-size: 24px;
+    color: cadetblue;
+}
