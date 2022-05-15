@@ -1,6 +1,6 @@
 import styles from './Login.module.css';
 import { validateLogin } from '../../utils/utils';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import { useNavigate } from "react-router-dom";
 const Login =  () => {
     const [error,setError] = useState('');
@@ -18,6 +18,12 @@ const Login =  () => {
             setError('invalid username or password');
         }
     }
+
+    useEffect(()=>{
+        if(localStorage.getItem('user')){
+            navigate('/dashboard');
+        }
+    },[]);
     return (
         <div>
         <form onSubmit={onLoginSubmit} className={styles.formWrapper}>
