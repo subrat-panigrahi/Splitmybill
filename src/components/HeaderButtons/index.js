@@ -1,9 +1,9 @@
-import './HeaderButtons.css';
+import style from './HeaderButtons.module.css';
 import Button from '../Button';
 
 export default function HeaderButtons({onAddExpense, onSettle}) {
   console.log(onAddExpense)
-    return (<div className='headerButtonContainer'>
+    return (<div className={style.headerButtonContainer}>
     <Button  onClickHandler={onAddExpense} text='Add expense' />
     <Button  onClickHandler={onSettle} text='Settle' />
     </div>)

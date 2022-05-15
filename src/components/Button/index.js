@@ -1,5 +1,5 @@
-import  './Button.css';
+import style  from './Button.module.css';
 
 export default function Button({text,onClickHandler,type}){
-    return <button className='buttonWrapper' onClick={()=>onClickHandler()}>{text}</button>
+    return <button className={style.buttonWrapper} onClick={()=>onClickHandler()}>{text}</button>
 }

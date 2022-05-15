@@ -79,7 +79,7 @@ function Dashboard() {
 
   useEffect(() => {
     getTransactions();
-  }, [getTransactions]);
+  }, []);
 
   const onAddExpenseClick = () => {
     setAddExpenseClicked(true);
