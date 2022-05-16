@@ -1,0 +1,12 @@
+.headerWrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.listWrapper {
+    width: fit-content;
+    border: 1px solid black;
+    padding: 8px;
+    margin: 8px;
+    border-radius: 8px;
+}

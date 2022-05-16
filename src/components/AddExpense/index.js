@@ -1,6 +1,7 @@
 // import { users } from '../../mock';
 import { useState } from 'react';
 import { postData } from '../../db/DbUtils';
+import styles from './AddExpense.module.css';
 
 export default function AddExpense({onExpenseSubmit, users}) {
   const [reason, setReason] = useState('');
@@ -60,7 +61,7 @@ export default function AddExpense({onExpenseSubmit, users}) {
   };
 
   return (
-    <div>
+    <div className={styles.addExpenseWrapper}>
       <form onSubmit={onExpenseFormSubmit}>
         <div>Reason</div>
         <input

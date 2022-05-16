@@ -7,3 +7,9 @@
     min-width: 100px;
     word-wrap: break-word;
 }
+
+.settleWrapper {
+    border: 1px solid cadetblue;
+    padding: 8px;
+    margin: 8px;
+}

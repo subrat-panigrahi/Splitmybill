@@ -1,5 +1,6 @@
 import Transaction from '../Transaction';
 import { useState } from 'react';
+import styles from './TransactionList.module.css';
 
 export default function TransactionList({ transactions, isLoading, type }) {
   const [sortBy, setSortBy] = useState('');
@@ -16,9 +17,10 @@ export default function TransactionList({ transactions, isLoading, type }) {
   }
   console.log(transactions);
   return (
-    <div>
-      <div>
-        {type === 'borrow' ? 'you owed' : 'you are owed'}
+    <div className={styles.listWrapper}>
+      <div className={styles.headerWrapper}>
+        <div>{type === 'borrow' ? 'you owed' : 'you are owed'}</div>
+        <div>
         <select
           name="transactionSortBy"
           onChange={(e) => {
@@ -47,6 +49,7 @@ export default function TransactionList({ transactions, isLoading, type }) {
             Amount
           </option>
         </select>
+        </div>
       </div>
       {!isLoading && transactions.length ? (
         transactions.map((transaction,index) => {
@@ -56,6 +59,7 @@ export default function TransactionList({ transactions, isLoading, type }) {
               type={transaction.type}
               amount={transaction.amount}
               text={transaction.text}
+              reason={transaction.reason}
               key={index}
             />
           );

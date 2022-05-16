@@ -17,7 +17,7 @@ export default function SettleExpense({ transactions, onSettlement }) {
   }
 
   return (
-    <div>
+    <div className={styles.settleWrapper}>
       <table>
         <tr className={styles.settleRowWrapper}>
           <td className={styles.rowItem}> user</td>
