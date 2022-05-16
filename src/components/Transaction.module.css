@@ -14,3 +14,12 @@
     font-size: 40px;
     margin-right: 8px;
 }
+
+.transactionContainer {
+    border : 1px solid cadetblue;
+    border-radius: 8px;
+    min-width: 200px;
+    width: fit-content;
+    margin: 8px;
+    padding: 8px;
+}

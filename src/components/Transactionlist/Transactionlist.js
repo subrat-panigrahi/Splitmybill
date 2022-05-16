@@ -14,6 +14,7 @@ export default function TransactionList({ transactions, isLoading, type }) {
   if (isLoading) {
     return <div>Loading.....</div>;
   }
+  console.log(transactions);
   return (
     <div>
       <div>
@@ -48,13 +49,14 @@ export default function TransactionList({ transactions, isLoading, type }) {
         </select>
       </div>
       {!isLoading && transactions.length ? (
-        transactions.map((transaction) => {
+        transactions.map((transaction,index) => {
           return (
             <Transaction
               name={transaction.name}
               type={transaction.type}
               amount={transaction.amount}
               text={transaction.text}
+              key={index}
             />
           );
         })

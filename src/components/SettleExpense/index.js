@@ -10,6 +10,7 @@ export default function SettleExpense({ transactions, onSettlement }) {
 
   // const currentUser = JSON.parse(localStorage.getItem('user'));
   const debtTransactions = transactions.filter((item) => item.type === 'debt');
+  console.log('debt', debtTransactions);
 
   if (!debtTransactions.length) {
     return <div> you have no settlements pending !</div>;
@@ -27,7 +28,7 @@ export default function SettleExpense({ transactions, onSettlement }) {
         </tr>
         <hr/>
         {debtTransactions.map((tr) => (
-          <tr className={styles.settleRowWrapper}>
+          <tr className={styles.settleRowWrapper} key={tr.id}>
             <td className={styles.rowItem}>{tr.name}</td>
             <td className={styles.rowItem}> {formatNumber(tr.amount)}</td>
             <td className={styles.rowItem}>{tr.reason}</td>

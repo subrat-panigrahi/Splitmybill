@@ -70,7 +70,8 @@ function Dashboard() {
           date: currentTransaction.date
         };
       });
-      userTransactions.reduce((acc,utx)=>{ return acc;},[]);
+      console.log('hmmmmm',userTransactions)
+      //userTransactions.reduce((acc,utx)=>{ return acc;},[]);
     calculateTotalValues(userTransactions);
     setUserTransactions(userTransactions);
     setUsers(users);

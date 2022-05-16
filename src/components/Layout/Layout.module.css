@@ -4,6 +4,7 @@
 .left {
     width: 30%;
     margin:16px;
+    border-right: 1px solid grey;
 }
 
 .right {
