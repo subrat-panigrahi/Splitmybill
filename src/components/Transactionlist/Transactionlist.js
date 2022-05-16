@@ -13,7 +13,7 @@ export default function TransactionList({ transactions, isLoading, type }) {
     setSortBy(value);
   };
   if (isLoading) {
-    return <div>Loading.....</div>;
+    return <div className={styles.listWrapper}>Loading.....</div>;
   }
   console.log(transactions);
   return (

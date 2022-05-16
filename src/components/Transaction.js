@@ -12,7 +12,7 @@ export default function Transaction({name,text,amount,type, reason}){
         <div className={styles.title}>{name}</div>
         <span> {type === 'debt'? 'owes you' : 'you owe'} </span> <span className={styles[valueStyle]}>{formatNumber(Number(amount))}</span>
         <div>
-        {reason}
+        reason: {reason}
         </div>
         </div>
     </div>
