@@ -14,7 +14,6 @@ export default function AddExpense({onExpenseSubmit, users}) {
   const onExpenseFormSubmit = (e) => {
     setError('');
     e.preventDefault();
-    console.log('e is', e.target);
     if(selectedUsers.length === 0){
         setError('please add users involved in this transaction');
     }
@@ -24,14 +23,13 @@ export default function AddExpense({onExpenseSubmit, users}) {
         const promiseArray = []
         for(let user of selectedUsers){
             const object = {user1:currentUser.id , transactionType: transactionType, reason : reason, date: date, user2: user, transactionId: `${reason}${timeStamp}`, status:0, amount: amountPerPesrson};
-            promiseArray .push(postData('transactions',object));
+            promiseArray.push(postData('transactions',object));
         }
 
         Promise.allSettled(promiseArray).then((res)=>{onExpenseSubmit();});
     }
   };
   const onUserSelection = (e) => {
-    console.log(e.target.value);
     if(e.target.checked){
         setError('');
     }
@@ -46,12 +44,10 @@ export default function AddExpense({onExpenseSubmit, users}) {
   };
 
   const onReasonChange = (reason) => {
-    console.log(reason);
     setReason(reason);
   };
 
   const onDateChange = (date) => {
-    console.log(date);
     setDate(date);
   };
 

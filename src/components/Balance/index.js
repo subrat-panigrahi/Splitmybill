@@ -1,4 +1,5 @@
 import style from './Balance.module.css';
+import {formatNumber} from '../../utils/utils';
 export default function Balance({title,value,type}){
     let valueStyle = type === 'borrow' ? 'pay' : 'receive';
     if(type === 'total'){
@@ -11,9 +12,6 @@ export default function Balance({title,value,type}){
     }
     return <div className={style.balanceWrapper}>
         <div className={style.title}>{title}</div>
-        <div className={style[valueStyle]}>{Intl.NumberFormat('en-IN',{
-    style: "currency",
-    currency: "INR",
-}).format(value)}</div>
+        <div className={style[valueStyle]}>{formatNumber(value)}</div>
     </div>
 }

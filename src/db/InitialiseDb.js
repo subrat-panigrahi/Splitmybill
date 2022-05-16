@@ -1,25 +1,16 @@
 import { initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
-
-// Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyClSudY9KXYL9nEqdFJTFa5GybQgNFuRD8",
-  authDomain: "splitmybill-637f9.firebaseapp.com",
-  databaseURL: "https://splitmybill-637f9-default-rtdb.firebaseio.com",
-  projectId: "splitmybill-637f9",
-  storageBucket: "splitmybill-637f9.appspot.com",
-  messagingSenderId: "910254100903",
-  appId: "1:910254100903:web:3f11199ebeb135c5f8e682"
+  apiKey: "AIzaSyCrh8spNsEV11BRPwtgpbGE51pK49GdpA0",
+  authDomain: "splitbill-681b6.firebaseapp.com",
+  projectId: "splitbill-681b6",
+  storageBucket: "splitbill-681b6.appspot.com",
+  messagingSenderId: "392145239651",
+  appId: "1:392145239651:web:442f9e3dba5dfae4764256"
 };
 
-// Initialize Firebase
-export function intialize(){
-    const app = initializeApp(firebaseConfig);
-    return getFirestore(app);
-}
+
 let db;
 (function initialize(){
     const app = initializeApp(firebaseConfig);

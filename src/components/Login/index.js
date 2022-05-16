@@ -7,7 +7,6 @@ const Login =  () => {
     const navigate = useNavigate();
     const onLoginSubmit = async (e) => {
         e.preventDefault();
-        console.log('e',e);
         const user = await validateLogin(e.target[0].value,e.target[1].value);
         if(user){
             //maintaining the user in localstorage
