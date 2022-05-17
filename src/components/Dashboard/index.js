@@ -133,7 +133,7 @@ function Dashboard() {
             />
           )}
           {accumulatedValue && (
-            <div style={{ display: 'flex' }}>
+            <div className={styles.balanceWrapper}>
               <Balance
                 title="total balance"
                 value={accumulatedValue.total}

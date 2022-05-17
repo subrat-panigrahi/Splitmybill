@@ -1,3 +1,16 @@
 .transactionSectionWrapper{
     display: flex;
 }
+
+.balanceWrapper {
+    display: flex; 
+ }
+ 
+ @media (max-width: 600px) {
+     .balanceWrapper {
+       display: block;
+     }
+     .transactionSectionWrapper{
+        display: block;
+    }
+   }

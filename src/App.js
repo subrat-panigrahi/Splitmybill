@@ -6,13 +6,11 @@ import Dashboard from './components/Dashboard';
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
-      </header>
     </div>
   );
 }
